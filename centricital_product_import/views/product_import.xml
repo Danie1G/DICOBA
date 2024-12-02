@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_product_import_form" model="ir.ui.view">
+        <field name="name">product.import.form</field>
+        <field name="model">product.import</field>
+        <field name="arch" type="xml">
+            <form string="Importación de Productos">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="import_file" widget="binary" filename="file_name"/>
+                        <field name="import_date" readonly="1"/>
+                    </group>
+                    <button name="process_file" string="Procesar Archivo" type="object" class="oe_highlight"/>
+                    <notebook>
+                        <page string="Productos Importados">
+                            <field name="product_ids">
+                                <tree>
+                                    <field name="product_template_id"/>
+                                    <field name="attribute_id"/>
+                                    <field name="attribute_value_id"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_product_import" model="ir.actions.act_window">
+        <field name="name">Importación de Productos</field>
+        <field name="res_model">product.import</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>
+
+
