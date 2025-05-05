@@ -5,8 +5,7 @@
         <field name="model">account.move</field>
         <field name="inherit_id" ref="account.view_move_form"/>
         <field name="arch" type="xml">
-
-            <!-- Inserta al final del notebook, sin depender de un ID que pueda haber cambiado -->
+            <!-- Añadir la nueva página dentro del notebook -->
             <xpath expr="//notebook" position="inside">
                 <page name="payments_widget" string="Payments Widget">
                     <field name="invoice_payments_widget_ids">
@@ -18,7 +17,6 @@
                     </field>
                 </page>
             </xpath>
-
         </field>
     </record>
 </odoo>
