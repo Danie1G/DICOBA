@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Acción que ejecuta el código Python -->
-    <record id="action_server_get_payments_widget_ids" model="ir.actions.server">
-        <field name="name">Get Invoice Payments Widget IDs</field>
-        <field name="model_id" ref="sead_invoice_payments_widget.model_account_move"/>
-        <field name="binding_model_id" ref="sead_invoice_payments_widget.model_account_move"/>
+
+    <!-- Server Action: llama a tu método get_invoice_payments_widget_ids -->
+    <record id="action_update_invoice_payments_widget" model="ir.actions.server">
+        <field name="name">Update Invoice Payments Widget</field>
+        <field name="model_id" ref="account.model_account_move"/>
         <field name="state">code</field>
-        <field name="code">record.get_invoice_payments_widget_ids()</field>
+        <field name="code">records.get_invoice_payments_widget_ids()</field>
     </record>
 
-    <!-- Automatización que llama a esa acción -->
-    <record id="onchange_sead_invoice_payments_widget" model="base.automation">
-        <field name="name">Onchange invoice_payments_widget_ids</field>
-        <field name="active" eval="True"/>
-        <field name="model_id" ref="sead_invoice_payments_widget.model_account_move"/>
+    <!-- Automatización que se dispara al crear o escribir en account.move -->
+    <record id="automated_action_update_invoice_payments" model="automated.action">
+        <field name="name">Auto Update Invoice Payments Widget</field>
+        <field name="model_id" ref="account.model_account_move"/>
         <field name="trigger">on_create_or_write</field>
-        <field name="trigger_field_ids" eval="[(4, ref('account.field_account_move__amount_residual'))]"/>
-        <field name="action_server_id" ref="action_server_get_payments_widget_ids"/>
+        <field name="active">True</field>
+        <field name="sequence">10</field>
+        <field name="action_server_id" ref="your_module_name.action_update_invoice_payments_widget"/>
     </record>
+
 </odoo>
