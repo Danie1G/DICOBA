@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="onchange_sead_invoice_payments_widget" model="base.automation">
+        <field name="name">Onchange invoice_payments_widget_ids</field>
+        <field name="active" eval="True"/>
+        <field name="model_id" ref="sead_invoice_payments_widget.model_account_move"/>
+        <field name="trigger">on_create_or_write</field>
+        <!-- <field name="on_change_fields">amount_residual,invoice_payments_widget_ids</field> -->
+        <field name="trigger_field_ids" eval="[(4,ref('account.field_account_move__amount_residual'))]"/>
+        <field name="state">code</field>
+        <field name="code">record.get_invoice_payments_widget_ids()</field>
+    </record>
+</odoo>
